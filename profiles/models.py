@@ -10,10 +10,13 @@ class UserProfile(models.Model):
     picture         = models.ImageField(upload_to='profile', null=True)
 
     def __str__(self) -> str:
-        return f'{self.firstname} {self.lastname}'
+        return self.fullname
     
     @property
     def age(self) -> int:
         today = date.today()
-        return today.year - self.birthdate.year - ((today.month, today.day) < (self.birthdate.mont, self.birthdate.day))
+        return today.year - self.birthdate.year - ((today.month, today.day) < (self.birthdate.month, self.birthdate.day))
     
+    @property
+    def fullname(self) -> str:
+        return f'{self.firstname} {self.lastname}'
